@@ -1,30 +1,24 @@
 package com.burakyapici.whatsappclonebackend.controller;
+
+
 import com.burakyapici.whatsappclonebackend.Results.Result;
 import com.burakyapici.whatsappclonebackend.model.User;
-import com.burakyapici.whatsappclonebackend.service.UserService;
+import com.burakyapici.whatsappclonebackend.service.UserServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/user")
+@AllArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @PostMapping(path = "/login")
+    @PostMapping("/login")
     public ResponseEntity<Result> login(@RequestBody User user){
-        //Kontroller eklenecek
-        return ResponseEntity.ok().body(this.userService.login(user));
-    }
-
-    @PostMapping(path="/register")
-    public ResponseEntity<Result> register(@RequestBody User user){
-        //Kontroller eklenecek
-        return ResponseEntity.ok().body(this.userService.register(user));
+        return ResponseEntity.ok().body(this.userServiceImpl.login(user));
     }
 
 }

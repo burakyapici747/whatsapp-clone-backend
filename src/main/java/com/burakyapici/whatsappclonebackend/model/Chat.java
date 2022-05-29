@@ -1,5 +1,6 @@
 package com.burakyapici.whatsappclonebackend.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,18 +14,18 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User {
+public class Chat {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
-    private String email;
-    private String password;
-    private String imageURL;
+    @Column(name = "chat_id")
+    private Long chatId;
+    private String chatName;
+    private String chatImageURL;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chatId")
-    private List<Chat> chats;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "messageId")
     private List<Message> messages;
-
 }
