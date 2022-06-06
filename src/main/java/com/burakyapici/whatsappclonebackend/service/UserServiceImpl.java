@@ -21,6 +21,13 @@ public class UserServiceImpl implements IUserService{
         if(Objects.isNull(userLogin)){
             return new Result<User>(false, null, "Kullanıcı adı veya şifre hatalı!");
         }
-        return new Result<User>(false, userLogin, "Giriş başarılı!");
+        return new Result<User>(false, this.iUserRepository.getUserByEmailAndPassword(user.getEmail(), user.getPassword()), "Giriş başarılı!");
     }
+
+    @Override
+    public Result<User> register(User user){
+        return new Result<User>(false, iUserRepository.save(user), "Kayıt başarili");
+    }
+
+
 }
